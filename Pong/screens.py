@@ -43,6 +43,7 @@ class IntroScreen:
                 if event.type == pg.MOUSEBUTTONDOWN:
                     run = False
 
+
 class ConfigScreen:
     def __init__(self, win):
         self.win = win
@@ -156,3 +157,50 @@ class ConfigScreen:
                 next_.draw(self.win)
 
             pg.display.update()
+
+
+class CreditsScreen:
+    @staticmethod
+    def display(win):
+        run = True
+
+        clock = pg.time.Clock()
+        font = pg.font.Font(None, 120)
+        orig_surf = font.render("Robert's", True, PURPLE)
+        txt_surf = orig_surf.copy()
+
+        font2 = pg.font.Font(None, 60)
+        surf2 = font2.render("Production", True, DARK_RED)
+        txt_surf2 = surf2.copy()
+        timer = 20
+        alpha = 255
+        pg.time.delay(900)
+        count = 0
+        font3 = pg.font.Font(None, 30)
+        surf3 = font3.render("Developing Games since 2020", True, DARK_BLUE)
+        txt_surf3 = surf3.copy()
+        while run:
+            count += 1
+            if timer > 0:
+                timer -= 1
+            else:
+                if alpha > 0:
+                    alpha = max(0, alpha - 4)
+                    txt_surf = orig_surf.copy()
+                    txt_surf.fill((255, 255, 255, alpha), special_flags=pg.BLEND_RGBA_MULT)
+
+                    txt_surf2 = surf2.copy()
+                    txt_surf2.fill((255, 255, 255, alpha), special_flags=pg.BLEND_RGBA_MULT)
+                    txt_surf3 = surf3.copy()
+                    txt_surf3.fill((255, 255, 255, alpha), special_flags=pg.BLEND_RGBA_MULT)
+
+            win.fill(BLACK)
+            win.blit(txt_surf, (80, 150))
+            win.blit(txt_surf2, (120, 235))
+            win.blit(txt_surf3, (85, 460))
+            pg.display.update()
+            clock.tick(22)
+
+            if count == 130:
+                pg.time.delay(70)
+                pg.quit()

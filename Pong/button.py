@@ -2,7 +2,7 @@ import pygame as pg
 
 
 class Button:
-    def __init__(self, text, x, y, color, font, width=150, height=50):
+    def __init__(self, text, x, y, color, font="comicsans", width=150, height=50):
         self.text = text
         self.x = x
         self.y = y
